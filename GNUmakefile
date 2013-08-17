@@ -3,7 +3,7 @@ LIB=		fcgi
 
 CFLAGS+=	-O3 -Wall -fPIC -I/usr/include -I/usr/include/lua5.1 \
 		-D_GNU_SOURCE
-LDADD+=		-L/usr/lib
+LDADD+=		-L/usr/lib -lfcgi
 
 LIBDIR=		/usr/lib/lua/5.1
 
