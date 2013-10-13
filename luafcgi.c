@@ -111,6 +111,28 @@ fcgi_get_param(lua_State *L)
 }
 
 static int
+fcgi_get_env(lua_State *L)
+{
+	char **p = env;
+	char *v;
+
+	if (p == NULL)
+		lua_pushnil(L);
+	else {
+		lua_newtable(L);
+		for (; *p; p++) {
+			v = strchr(*p, '=');
+			if (v != NULL) {
+				lua_pushlstring(L, *p, v - *p);
+				lua_pushstring(L, ++v);
+				lua_settable(L, -3);
+			}
+		}
+	}
+	return 1;
+}
+
+static int
 fcgi_open_socket(lua_State *L)
 {
 	int sock;
@@ -140,7 +162,7 @@ fcgi_set_info(lua_State *L)
 	lua_pushliteral(L, "FastCGI interface for Lua");
 	lua_settable(L, -3);
 	lua_pushliteral(L, "_VERSION");
-	lua_pushliteral(L, "fcgi 1.0.0");
+	lua_pushliteral(L, "fcgi 1.1.0");
 	lua_settable(L, -3);
 }
 
@@ -154,13 +176,17 @@ luaopen_fcgi(lua_State* L)
 		{ "getLine",	fcgi_get_line },
 		{ "getStr",	fcgi_get_str },
 		{ "getParam",	fcgi_get_param },
+		{ "getEnv",	fcgi_get_env },
 		{ "openSocket",	fcgi_open_socket },
 		{ "putStr",	fcgi_put_str },
 		{ NULL,		NULL }
 	};
 
+#if LUA_VERSION_NUM >= 502
+	luaL_newlib(L, methods);
+#else
 	luaL_register(L, "fcgi", methods);
+#endif
 	fcgi_set_info(L);
-
 	return 1;
 }
