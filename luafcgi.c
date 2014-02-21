@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, Micro Systems Marc Balmer, CH-5073 Gipf-Oberfrick
+ * Copyright (c) 2013, 2014 Micro Systems Marc Balmer, CH-5073 Gipf-Oberfrick
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -156,7 +156,8 @@ static void
 fcgi_set_info(lua_State *L)
 {
 	lua_pushliteral(L, "_COPYRIGHT");
-	lua_pushliteral(L, "Copyright (C) 2013 micro systems marc balmer");
+	lua_pushliteral(L, "Copyright (C) 2013, 2014 "
+		"micro systems marc balmer");
 	lua_settable(L, -3);
 	lua_pushliteral(L, "_DESCRIPTION");
 	lua_pushliteral(L, "FastCGI interface for Lua");
