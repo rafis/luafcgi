@@ -1,4 +1,4 @@
-SRCS=		luafcgi.c
+SRCS=		src/luafcgi.c
 LIB=		fcgi
 
 CFLAGS+=	-O3 -Wall -fPIC -I/usr/include -I/usr/include/lua5.1 \

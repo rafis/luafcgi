@@ -1,4 +1,4 @@
-SRCS=		luafcgi.c
+SRCS=		src/luafcgi.c
 LIB=		fcgi
 
 OS!=		uname

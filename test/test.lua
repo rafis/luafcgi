@@ -1,11 +1,11 @@
 -- FastCGI Test Program
 
-require 'fcgi'
+local fcgi = require('fcgi')
 
 -- The unix module is needed for a Unix dup2 function, replace it with
 -- luaposix if you want.
 
-require 'unix'
+local unix = require('unix')
 
 -- Create a local socket, make sure the FastCGI enable webserver
 -- has r/w access to it, might need a chmod call here
